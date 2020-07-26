@@ -84,7 +84,6 @@ while True:
             exit()
 
 
-
 # Parse the JSON response to pull out the individual occurence_id
 #------------------------------------------
 # Check if there are no results from the RQL query
