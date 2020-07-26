@@ -1,6 +1,6 @@
 # Rollbar Singles
 
-This is a collection of Python scripts to be used with (Rollbar's)[http://rollbar.com/] service.
+This is a collection of Python scripts to be used with [Rollbar's](http://rollbar.com/) service.
 They are meant to be individual and singular scripts. The scripts themselves are titled and annotated to be as user friendly as possible.
 
 ## Installing requirements
