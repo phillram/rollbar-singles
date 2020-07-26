@@ -84,6 +84,14 @@ while True:
             exit()
 
 
+
+# Parse the JSON response to pull out the individual occurence_id
+#------------------------------------------
+# Check if there are no results from the RQL query
+if not response_data['result']['result']['rows']:
+    print('There are no occurrences that match your RQL query')
+    exit()
+
 # Check what column the occurence ID is
 occurrence_index = 0
 for i in response_data['result']['result']['columns']:
@@ -91,15 +99,6 @@ for i in response_data['result']['result']['columns']:
     if i == 'occurrence_id':
         occurrence_column = occurrence_index
     occurrence_index += 1
-
-
-# Parse the JSON response to pull out the individual occurence_id
-#------------------------------------------
-
-# Check if there are no results from the RQL query
-if not response_data['result']['result']['rows']:
-    print('There are no occurrences that match your RQL query')
-    exit()
 
 # Pull occurrence IDs if there is data returned
 for i in response_data['result']['result']['rows']:
