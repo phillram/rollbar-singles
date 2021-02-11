@@ -14,11 +14,11 @@ import requests, json, time
 account_read_token = ''
 account_write_token = ''
 
-# Time in seconds for rate limit window. Leave blank to set default
-window_size = ''
+# Time in seconds for rate limit window. Leave zero to set default
+window_size = '0'
 
-# Number of occurrences allowed per window above. Leave blank to set default
-window_count = ''
+# Number of occurrences allowed per window above. Leave zero to set default
+window_count = '0'
 
 # _______________________________________________________________
 # Get all projects associated with your Rollbar account
