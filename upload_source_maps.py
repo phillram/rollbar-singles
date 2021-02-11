@@ -6,19 +6,19 @@ import requests
 def main(project_read_token, code_version, source_map_path):
     url = "https://api.rollbar.com/api/1/sourcemap"
     headers = {
-      'X-Rollbar-Access-Token': project_read_token
+        'X-Rollbar-Access-Token': project_read_token
     }
 
     os.chdir(source_map_path)
     for file in glob.glob("*.map"):
-        #Strip the ".map" from the filename
+        # Strip the ".map" from the filename
         minified_url = file[:-4]
         payload = {
             'version': code_version,
             'minified_url': minified_url
         }
         files = [
-          ('source_map', open(file,'rb'))
+            ('source_map', open(file,'rb'))
         ]
         
         response = requests.request("POST", url, headers=headers, data=payload, files=files)
