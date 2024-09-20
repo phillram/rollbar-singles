@@ -45,7 +45,7 @@ def get_item_id(rollbar_item_counter):
 # Pull list of all occurrences in the item
 # _______________________________________________________________
 def delete_occurrences(item_id):
-    url = 'https://api.rollbar.com/api/1/item/' + str(item_id) + '/instances'
+    url = 'https://api.rollbar.com/api/1/item/' + str(item_id) + '/instances?limit=5000'
 
     headers = {
         'X-Rollbar-Access-Token': project_read_token
@@ -59,6 +59,10 @@ def delete_occurrences(item_id):
     # Parse the response to loop through the occurrence IDs
     response_data = response.json()
 
+    # If there are no occurrences, stop the execution
+    if response_data['result']['instances'] == []:
+        return
+
     for i in response_data['result']['instances']:
         occurrence_id = i['id']
 
@@ -70,8 +74,14 @@ def delete_occurrences(item_id):
         payload = {}
 
         response = requests.request('DELETE', url, headers = headers, data = payload)
-        print('Deleted Occurrence ID: ' + str(occurrence_id))
+        status = response.status_code
+        if status == 200:
+            print('Deleted Occurrence ID: ' + str(occurrence_id))
+        else:
+            print('Deletion is failed. Occurrence ID: ' + str(occurrence_id))
 
+    # call next page
+    delete_occurrences(item_id)
 
 # _______________________________________________________________
 # Running the functions above
